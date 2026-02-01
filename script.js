@@ -1,7 +1,6 @@
-//your JS code here. If required.
 const fontSizeInput = document.getElementById("fontsize");
 const fontColorInput = document.getElementById("fontcolor");
-const form = document.getElementById("form");
+const saveBtn = document.querySelector("input[type='submit']");
 
 // Helper: set cookie
 function setCookie(name, value) {
@@ -24,16 +23,18 @@ const savedFontColor = getCookie("fontcolor");
 
 if (savedFontSize) {
   document.documentElement.style.setProperty("--fontsize", savedFontSize + "px");
+  document.body.style.fontSize = savedFontSize + "px";
   fontSizeInput.value = savedFontSize;
 }
 
 if (savedFontColor) {
   document.documentElement.style.setProperty("--fontcolor", savedFontColor);
+  document.body.style.color = savedFontColor;
   fontColorInput.value = savedFontColor;
 }
 
 // Save preferences
-form.addEventListener("submit", (e) => {
+saveBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   const fontSize = fontSizeInput.value;
@@ -44,4 +45,7 @@ form.addEventListener("submit", (e) => {
 
   document.documentElement.style.setProperty("--fontsize", fontSize + "px");
   document.documentElement.style.setProperty("--fontcolor", fontColor);
+
+  document.body.style.fontSize = fontSize + "px";
+  document.body.style.color = fontColor;
 });
